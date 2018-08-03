@@ -46,7 +46,8 @@ public class University {
         this.name = name;
     }
 
-
-
+    public void addFaculty(Faculty newFaculty){
+        this.faculties.add(newFaculty);
+    }
 
 }

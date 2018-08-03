@@ -3,8 +3,10 @@ package com.example.demo.service;
 import com.example.demo.dao.ArticleDao;
 import com.example.demo.dao.FacultyDao;
 import com.example.demo.dao.SubjectDao;
+import com.example.demo.dao.UniversityDao;
 import com.example.demo.model.Article;
 import com.example.demo.model.Faculty;
+import com.example.demo.model.University;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,8 @@ public class ArticleService {
     @Autowired
     private SubjectDao subjectDao;
 
+    @Autowired
+    private UniversityDao universityDao;
 
     @Autowired
     private FacultyDao facultyDao;
@@ -32,6 +36,15 @@ public class ArticleService {
         articleDao.save(article);
 
         return "added article : " + article.getTitle() + " to db";
+    }
+
+    @GetMapping(path = "/insertFaculty")
+    public String insertFaculty() {
+        Faculty newFaculty = new Faculty();
+        newFaculty.setDescription("Description 1");
+        newFaculty.setName("Facultatea 1");
+        facultyDao.save(newFaculty);
+        return "added faculty: " + newFaculty.getName() + "to db";
     }
 
     @GetMapping(path = "/getArticol/{id}")
