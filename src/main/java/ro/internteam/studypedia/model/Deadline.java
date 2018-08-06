@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package ro.internteam.studypedia.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -51,5 +51,10 @@ public class Deadline {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "article: " + this.name + " date: " + this.date + " id: " + this.id + " user id: " + this.user;
     }
 }

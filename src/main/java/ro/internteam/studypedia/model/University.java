@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package ro.internteam.studypedia.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

@@ -1,6 +1,6 @@
-package com.example.demo.dao;
+package ro.internteam.studypedia.dao;
 
-import com.example.demo.model.Branch;
+import ro.internteam.studypedia.model.Branch;
 import org.springframework.data.repository.CrudRepository;
 
 public interface BranchDao extends CrudRepository<Branch, Integer> {

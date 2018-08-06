@@ -1,6 +1,6 @@
-package com.example.demo.dao;
+package ro.internteam.studypedia.dao;
 
-import com.example.demo.model.Faculty;
+import ro.internteam.studypedia.model.Faculty;
 import org.springframework.data.repository.CrudRepository;
 
 /**

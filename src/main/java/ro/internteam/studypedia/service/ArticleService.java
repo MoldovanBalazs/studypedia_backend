@@ -1,10 +1,10 @@
-package com.example.demo.service;
+package ro.internteam.studypedia.service;
 
-import com.example.demo.dao.ArticleDao;
-import com.example.demo.dao.FacultyDao;
-import com.example.demo.dao.SubjectDao;
-import com.example.demo.model.Article;
-import com.example.demo.model.Faculty;
+import ro.internteam.studypedia.dao.ArticleDao;
+import ro.internteam.studypedia.dao.FacultyDao;
+import ro.internteam.studypedia.dao.SubjectDao;
+import ro.internteam.studypedia.model.Article;
+import ro.internteam.studypedia.model.Faculty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

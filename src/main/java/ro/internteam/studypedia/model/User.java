@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package ro.internteam.studypedia.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +15,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
+
+    @Column(name = "name")
+    private String name;
+
 
     @Column(name = "username")
     private String username;
@@ -36,6 +40,15 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Deadline> deadlines = new ArrayList<>();
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     public List<Deadline> getDeadlines() {
         return deadlines;

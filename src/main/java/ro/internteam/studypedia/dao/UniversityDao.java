@@ -1,6 +1,6 @@
-package com.example.demo.dao;
+package ro.internteam.studypedia.dao;
 
-import com.example.demo.model.University;
+import ro.internteam.studypedia.model.University;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UniversityDao extends CrudRepository<University, Integer> {

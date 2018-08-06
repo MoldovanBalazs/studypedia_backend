@@ -1,4 +1,4 @@
-package com.example.demo;
+package ro.internteam.studypedia;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,9 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = "com.example.demo.dao")
-@EntityScan(basePackages = "com.example.demo.model")
-@ComponentScan({"com.example.demo.service"})
+@EnableJpaRepositories(basePackages = "ro.internteam.studypedia.dao")
+@EntityScan(basePackages = "ro.internteam.studypedia.model")
+@ComponentScan({"ro.internteam.studypedia.service", "ro.internteam.studypedia.resource"})
 public class DemoApplication {
 
 	public static void main(String[] args) {
