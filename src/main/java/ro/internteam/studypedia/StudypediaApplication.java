@@ -10,9 +10,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "ro.internteam.studypedia.dao")
 @EntityScan(basePackages = "ro.internteam.studypedia.model")
 @ComponentScan({"ro.internteam.studypedia.service", "ro.internteam.studypedia.resource"})
-public class DemoApplication {
+public class StudypediaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(StudypediaApplication.class, args);
 	}
 }
