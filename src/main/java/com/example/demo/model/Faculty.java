@@ -41,31 +41,40 @@ import java.util.List;
             return id;
         }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+        public void setId(Integer id) {
+            this.id = id;
+        }
 
-    public String getName() {
-        return name;
-    }
+        public String getName() {
+            return name;
+        }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+        public void setName(String name) {
+            this.name = name;
+        }
 
-    public String getDescription() {
-        return description;
-    }
+        public String getDescription() {
+            return description;
+        }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+        public void setDescription(String description) {
+            this.description = description;
+        }
 
-    /*public List<Subject> getMaterii() {
-        return materii;
-    }
+        public University getUniversity() {
+            return university;
+        }
 
-    public void setMaterii(List<Subject> materii) {
-        this.materii = materii;
-    }*/
+        public void setUniversity(University university) {
+            this.university = university;
+        }
+
+
+        /*public List<Subject> getMaterii() {
+            return materii;
+        }
+
+        public void setMaterii(List<Subject> materii) {
+            this.materii = materii;
+        }*/
 }
