@@ -1,7 +1,7 @@
 package ro.internteam.studypedia.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "article")
@@ -16,7 +16,7 @@ public class Article {
     private String title;
 
     @Column(name = "date")
-    private LocalDate date;
+    private LocalDateTime date;
 
 //    @Column(name = "userId")
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -50,11 +50,11 @@ public class Article {
         this.title = title;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

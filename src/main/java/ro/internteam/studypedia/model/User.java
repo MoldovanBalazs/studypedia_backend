@@ -1,12 +1,11 @@
 package ro.internteam.studypedia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author I. Marcu
- */
 @Entity
 @Table(name = "user")
 public class User {
@@ -35,9 +34,11 @@ public class User {
     @ManyToOne(targetEntity = Branch.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Branch branch;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     List<Article> articles = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Deadline> deadlines = new ArrayList<>();
 
@@ -48,7 +49,6 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public List<Deadline> getDeadlines() {
         return deadlines;

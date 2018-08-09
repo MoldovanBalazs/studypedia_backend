@@ -7,8 +7,7 @@ import ro.internteam.studypedia.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.Random;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -20,46 +19,26 @@ public class DeadlineResource {
     @Autowired
     private UserDao userDao;
 
-    @GetMapping(path = "/insertNewUser")
-    public String insertNewUser() {
-        User user = new User();
-        user.setName("Ion");
-        user.setUsername("Ion@Bo$$");
-        userDao.save(user);
-
-        return "user " + user.getName() + " with username " + user.getUsername() + " registered in the system";
+    @PostMapping("/newdeadline")
+    public void insertDeadline(@RequestBody Deadline deadline) {
+        deadlineDao.save(deadline);
     }
 
-    @GetMapping(path = "/getUserDeadline")
-    public String getUserDeadline() {
+    @GetMapping(path = "/user/{id}/deadlines")
+    public List<Deadline> getUserDeadlines(@PathVariable(value = "id") Integer id) {
+        return userDao.findById(id).get().getDeadlines();
+    }
 
+    @GetMapping(path = "/deadline/{id}")
+    public Deadline getDeadlineById(@PathVariable(name = "id") Integer id) {
+        return deadlineDao.findById(id).get();
+    }
+
+    @PostMapping("/testInsertDeadline")
+    public void insertUtility() {
         User user = userDao.findById(1).get();
-        return  userDao.findById(user.getId()).get().getDeadlines().toString();
+        Deadline deadline = new Deadline();
+        deadline.setName("My new Deadline");
+        // return user.getUsername() + " successfully registered deadline with id: " + deadline.getId().toString() ;
     }
-
-    public String insertNewDeadline(User user) {
-
-        for(int i = 0; i < 5; i++) {
-            Deadline deadline = new Deadline();
-            deadline.setName("Article #" + new Random() + "from " + user.getName());
-            deadline.setUser(user);
-            deadline.setDate(LocalDate.now());
-
-            deadlineDao.save(deadline);
-        }
-
-        return "Deadline registered successfully";
-    }
-
-    public String findUser() {
-        return "Name " + userDao.findById(1).get().getName();
-    }
-
-    @GetMapping(path = "/testDeadlineInsert")
-    public String testDeadlineInsert() {
-        User user = userDao.findById(1).get();
-        return insertNewDeadline(user);
-    }
-
-
 }

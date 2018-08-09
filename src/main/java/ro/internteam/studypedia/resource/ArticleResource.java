@@ -9,7 +9,7 @@ import ro.internteam.studypedia.model.ArticleType;
 import ro.internteam.studypedia.model.User;
 import ro.internteam.studypedia.model.Subject;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -35,7 +35,7 @@ public class ArticleResource {
 //        article.setSubject(subject);
 //        article.setUser(user);
         article.setArticleStatus(ArticleStatus.PENDING);
-        article.setDate(LocalDate.now());
+        article.setDate(LocalDateTime.now());
         articleDao.save(article);
         return "added article : " + article.getTitle() + " to db with ";
     }
