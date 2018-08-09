@@ -29,6 +29,22 @@ public class ArticleService {
     @Autowired
     private FacultyDao facultyDao;
 
+    @GetMapping(path = "/insertArticol")
+    public String insertArticol() {
+        Article article = new Article();
+        article.setTitle(new Random().nextInt() + " nume ");
+        article.setDescription(new Random().nextInt() + " descriere ");
+        articleDao.save(article);
+
+        return "added article : " + article.getTitle() + " to db";
+    }
+
+    @GetMapping(path = "/getArticol/{id}")
+    public Object getArticol(@PathVariable("id") Integer id) {
+
+        return articleDao.findById(id).get();
+    }
+
     public void insertArticle(
             String title,
             ArticleType type,

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ro.internteam.studypedia.service.UniversityService;
 
+/*Adi*/
 @RestController
 @CrossOrigin
 public class UniversityResource {
@@ -24,7 +25,7 @@ public class UniversityResource {
         return this.universityService.getUniversities();
     }
 
-    @PostMapping(path = "/insertFaculty")
+    @PutMapping(path = "/insertFaculty")
     public String insertFaculty(
             @RequestParam(name = "universityId") Integer universityId,
             @RequestParam(name = "faculty") String faculty

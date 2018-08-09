@@ -6,6 +6,8 @@ import ro.internteam.studypedia.dao.ArticleDao;
 import ro.internteam.studypedia.dao.UserDao;
 import ro.internteam.studypedia.model.*;
 import ro.internteam.studypedia.service.ArticleService;
+import ro.internteam.studypedia.service.UniversityService;
+import ro.internteam.studypedia.service.ArticleService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,6 +27,12 @@ public class ArticleResource {
 
     @Autowired
     private ArticleDao articleDao;
+
+    @Autowired
+    private ArticleService articleService;
+
+    @Autowired
+    private UniversityService universityService;
 
     @GetMapping(path = "/user/{id}/articles")
     public List<Article> getUserArticle(@PathVariable Integer id) {
@@ -62,11 +70,6 @@ public class ArticleResource {
         return "added Article " + title;
     }
 
-    @PutMapping(path = "/article")
-    public void updateStatus(@RequestParam(value = "articleId") Integer articleId,
-                               @RequestParam(value = "status") ArticleStatus status){
-        this.articleService.updateArticle(articleId,status);
-    }
 
     @GetMapping(path = "/article/all")
     public Object getArticles() {
@@ -79,14 +82,21 @@ public class ArticleResource {
         return this.articleService.getArticlesByType(type);
     }
 
-    @GetMapping(path = "/user/{id}/articles")
-    public List<Article> getUserArticle(@PathVariable Integer id) {
-        return userDao.findById(id).get().getArticles();
-    }
 
     @DeleteMapping(path = "/articleDelete/{id}")
     public void deleteArticleById(@PathVariable("id") Integer id) {
         this.articleService.deleteArticleById(id);
+    }
+
+    @PutMapping(path = "/article")
+    public String updateStatus(@RequestParam(value = "articleId") Integer articleId,
+                               @RequestParam(value = "status") ArticleStatus status){
+        Article article = articleDao.findById(articleId).orElse(null);
+        if(article != null){
+            article.setArticleStatus(status);
+            articleDao.save(article);
+        }
+        return "modified article " + article.getTitle() + " to " + article.getArticleStatus();
     }
 
 }
