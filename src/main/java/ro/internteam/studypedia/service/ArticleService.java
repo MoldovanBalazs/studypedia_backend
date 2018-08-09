@@ -4,10 +4,12 @@ import ro.internteam.studypedia.dao.ArticleDao;
 import ro.internteam.studypedia.dao.FacultyDao;
 import ro.internteam.studypedia.dao.SubjectDao;
 import ro.internteam.studypedia.model.Article;
+import ro.internteam.studypedia.model.ArticleStatus;
 import ro.internteam.studypedia.model.Faculty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Random;
 
 @RestController
@@ -40,19 +42,31 @@ public class ArticleService {
         return articleDao.findById(id).get();
     }
 
-    @GetMapping(path = "/insertMaterie")
-    public void insertMaterie() {
-//
+    public void insertArticle(
+            String title,
+            String date,
+            String description
+    ){
+        Article article = new Article();
+        article.setTitle(title);
+        article.setDescription(description);
+        /**TO DO
+         * - convert String date to LocalDateTime;
+         * */
+
+        this.articleDao.save(article);
     }
 
-
-    @GetMapping(path = "/insertFavorite")
-    public void insertFavorite() {
-
+    public Object getArticles(){
+        return this.articleDao.findAll();
     }
 
-    @PostMapping(path = "/insertFacultate")
-    public void insertFacultate(@RequestParam(name = "faculty") Faculty faculty) {
-
+    public void updateArticle(Integer articleId, ArticleStatus status){
+        Article article = articleDao.findById(articleId).orElse(null);
+        if(article != null){
+            article.setArticleStatus(status);
+            articleDao.save(article);
+        }
     }
+
 }
