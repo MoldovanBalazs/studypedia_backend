@@ -90,12 +90,5 @@ public class Article {
         this.subject = subject;
     }
 
-    public void setArticleStatus(ArticleStatus newArticleStatus){
-        this.articleStatus = newArticleStatus;
-    }
-
-    public ArticleStatus getArticleStatus(){
-        return this.articleStatus;
-    }
 
 }

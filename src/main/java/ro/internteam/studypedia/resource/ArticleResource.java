@@ -1,13 +1,17 @@
 package ro.internteam.studypedia.resource;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ro.internteam.studypedia.dao.ArticleDao;
 import ro.internteam.studypedia.dao.UserDao;
 import ro.internteam.studypedia.model.*;
+import ro.internteam.studypedia.service.ArticleService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import ro.internteam.studypedia.model.Article;
+import ro.internteam.studypedia.model.User;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,37 +60,33 @@ public class ArticleResource {
     ){
         this.articleService.insertArticle(title, type, description);
         return "added Article " + title;
+    }
 
+    @PutMapping(path = "/article")
+    public void updateStatus(@RequestParam(value = "articleId") Integer articleId,
+                               @RequestParam(value = "status") ArticleStatus status){
+        this.articleService.updateArticle(articleId,status);
+    }
+
+    @GetMapping(path = "/article/all")
+    public Object getArticles() {
+
+        return articleDao.findAll();
     }
 
     @GetMapping(path = "/typeArticle")
     public Object getArticlesByType(@RequestParam(value = "type") ArticleType type) {
-        List<Article> filteredArticles = new ArrayList<>();
-        articleDao.findAll().forEach(article -> {
-            if(article.getArticleType().equals(type))
-                filteredArticles.add(article);
-        });
-        return filteredArticles;
+        return this.articleService.getArticlesByType(type);
+    }
+
+    @GetMapping(path = "/user/{id}/articles")
+    public List<Article> getUserArticle(@PathVariable Integer id) {
+        return userDao.findById(id).get().getArticles();
     }
 
     @DeleteMapping(path = "/articleDelete/{id}")
     public void deleteArticleById(@PathVariable("id") Integer id) {
-        articleDao.findAll().forEach(article -> {
-            if(article.getId().equals(id)){
-                articleDao.delete(article);
-            }
-        });
-    }
-
-    @PutMapping(path = "/article")
-    public String updateStatus(@RequestParam(value = "articleId") Integer articleId,
-                               @RequestParam(value = "status") ArticleStatus status){
-        Article article = articleDao.findById(articleId).orElse(null);
-        if(article != null){
-            article.setArticleStatus(status);
-            articleDao.save(article);
-        }
-        return "modified article " + article.getTitle() + " to " + article.getArticleStatus();
+        this.articleService.deleteArticleById(id);
     }
 
 }
