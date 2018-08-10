@@ -29,22 +29,6 @@ public class ArticleService {
     @Autowired
     private FacultyDao facultyDao;
 
-    @GetMapping(path = "/insertArticol")
-    public String insertArticol() {
-        Article article = new Article();
-        article.setTitle(new Random().nextInt() + " nume ");
-        article.setDescription(new Random().nextInt() + " descriere ");
-        articleDao.save(article);
-
-        return "added article : " + article.getTitle() + " to db";
-    }
-
-    @GetMapping(path = "/getArticol/{id}")
-    public Object getArticol(@PathVariable("id") Integer id) {
-
-        return articleDao.findById(id).get();
-    }
-
     public void insertArticle(
             String title,
             ArticleType type,
@@ -68,10 +52,20 @@ public class ArticleService {
         return "modified article " + article.getTitle() + " to " + article.getArticleStatus();
     }
 
-    public List getArticlesByType(ArticleType type){
+    //Daiana
+    public List getArticlesByType(String type){
         List<Article> filteredArticles = new ArrayList<>();
+        int articleTypeInt = Integer.parseInt(type);
+        ArticleType articleType;
+
+        if(articleTypeInt == 0) articleType = ArticleType.NOTE;
+        else if(articleTypeInt == 1) articleType = ArticleType.SEMINAR;
+        else if(articleTypeInt == 2) articleType = ArticleType.LAB;
+        else articleType = ArticleType.EXAM;
+        ArticleType finalArticleType = articleType;
+
         articleDao.findAll().forEach(article -> {
-            if(article.getArticleType().equals(type))
+            if(article.getArticleType().equals(finalArticleType))
                 filteredArticles.add(article);
         });
         return filteredArticles;

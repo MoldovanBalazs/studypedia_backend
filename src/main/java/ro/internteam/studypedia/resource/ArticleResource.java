@@ -73,12 +73,14 @@ public class ArticleResource {
 
     @GetMapping(path = "/article/all")
     public Object getArticles() {
-
+        System.out.println("GETALLARTICLES CALLED");
         return articleDao.findAll();
     }
 
+    //Daiana
     @GetMapping(path = "/typeArticle")
-    public Object getArticlesByType(@RequestParam(value = "type") ArticleType type) {
+    public Object getArticlesByType(@RequestParam(value = "type") String type) {
+        System.out.println(type);
         return this.articleService.getArticlesByType(type);
     }
 
