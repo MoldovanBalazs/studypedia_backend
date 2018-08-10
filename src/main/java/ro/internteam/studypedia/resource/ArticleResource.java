@@ -70,20 +70,17 @@ public class ArticleResource {
         return "added Article " + title;
     }
 
-
     @GetMapping(path = "/article/all")
     public Object getArticles() {
-        System.out.println("GETALLARTICLES CALLED");
         return articleDao.findAll();
     }
 
     //Daiana
-    @GetMapping(path = "/typeArticle")
+    @GetMapping(path = "/article/type")
     public Object getArticlesByType(@RequestParam(value = "type") String type) {
         System.out.println(type);
         return this.articleService.getArticlesByType(type);
     }
-
 
     @DeleteMapping(path = "/articleDelete/{id}")
     public void deleteArticleById(@PathVariable("id") Integer id) {
