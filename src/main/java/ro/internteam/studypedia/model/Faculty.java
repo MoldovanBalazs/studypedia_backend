@@ -53,19 +53,4 @@ import java.util.List;
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /*public List<Subject> getMaterii() {
-        return materii;
-    }
-
-    public void setMaterii(List<Subject> materii) {
-        this.materii = materii;
-    }*/
 }
