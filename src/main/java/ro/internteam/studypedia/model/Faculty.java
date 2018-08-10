@@ -31,9 +31,6 @@ import java.util.List;
                 inverseJoinColumns = {@JoinColumn(name = "materie_id", nullable = false)})
         private List<Subject> materii  = new ArrayList<>();*/
 
-
-
-
         @OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty", fetch = FetchType.EAGER)
         private List<Branch> branches = new ArrayList<>();
 

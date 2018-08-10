@@ -18,6 +18,14 @@ public class Article {
     @Column(name = "date")
     private LocalDateTime date;
 
+    /**Adi*/
+    @Column(name = "author")
+    private String author;
+
+    /**Adi*/
+    @Column(name = "proposerName")
+    private String proposerName;
+
 //    @Column(name = "userId")
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;

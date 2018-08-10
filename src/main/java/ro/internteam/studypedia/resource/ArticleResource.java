@@ -46,20 +46,6 @@ public class ArticleResource {
         return getUserArticle(id);
     }
 
-    @PostMapping(path = "/articleinsert")
-    public String insertArticles() {
-        User user = userDao.findById(8).get();
-        for(int i = 0; i < 15; i++){
-            Article article = new Article();
-            article.setTitle( "Article no" + new Random().nextInt());
-            article.setDescription("Description hash of this article is" + new Random().nextInt());
-            article.setUser(user);
-            article.setDate(LocalDateTime.now());
-            articleDao.save(article);
-        }
-        return "Articles saved successfully";
-    }
-
     @PostMapping(path = "/insertArticle")
     public String insertArticle(
             @RequestParam(name = "title") String title,

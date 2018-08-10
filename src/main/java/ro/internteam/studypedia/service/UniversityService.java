@@ -3,6 +3,7 @@ package ro.internteam.studypedia.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
+import ro.internteam.studypedia.dao.FacultyDao;
 import ro.internteam.studypedia.dao.UniversityDao;
 import ro.internteam.studypedia.model.Faculty;
 import ro.internteam.studypedia.model.University;
@@ -12,6 +13,9 @@ public class UniversityService {
 
     @Autowired
     private UniversityDao universityDao;
+
+    @Autowired
+    private FacultyDao facultyDao;
 
     public void saveUniversity(String universityName){
         University newUniversity = new University();
@@ -32,6 +36,11 @@ public class UniversityService {
             return "added faculty " + facultyName;
         }
         return "University with id = " + universityId + " doesn't exist";
+    }
+
+    /**Adi*/
+    public Object getFaculties(Integer universityId){
+        return "";
     }
 
 }
