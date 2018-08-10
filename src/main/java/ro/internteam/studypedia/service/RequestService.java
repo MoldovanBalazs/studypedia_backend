@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package ro.internteam.studypedia.service;
 
-import com.example.demo.dao.ArticleDao;
+import ro.internteam.studypedia.dao.ArticleDao;
 import com.example.demo.model.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
