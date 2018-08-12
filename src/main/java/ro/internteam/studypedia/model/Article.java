@@ -82,4 +82,20 @@ public class Article {
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
+
+    public ArticleStatus getArticleStatus() {
+        return articleStatus;
+    }
+
+    public void setArticleStatus(ArticleStatus articleStatus) {
+        this.articleStatus = articleStatus;
+    }
+
+    public ArticleType getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(ArticleType articleType) {
+        this.articleType = articleType;
+    }
 }
