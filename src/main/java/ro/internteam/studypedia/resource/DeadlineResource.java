@@ -28,6 +28,14 @@ public class DeadlineResource {
         return (deadline);
     }
 
+    @DeleteMapping("/deadline")
+    public String deleteDeadline(@RequestParam String deadlineId) {
+        System.out.println(deadlineId);
+        deadlineDao.delete(deadlineDao.findById(Integer.valueOf(deadlineId)).get());
+
+        return deadlineId.toString();
+    }
+
     @GetMapping(path = "/user/{userId}/deadlines")
     public @ResponseBody List<Deadline> getUserDeadlines(@PathVariable Integer userId) {
         //return userDao.findById(userId).get().getDeadlines();
@@ -41,9 +49,15 @@ public class DeadlineResource {
 
     @PostMapping("/testInsertDeadline")
     public void insertUtility() {
-        User user = userDao.findById(1).get();
-        Deadline deadline = new Deadline();
-        deadline.setName("My new Deadline");
+        User user = userDao.findById(8).get();
+        for(int i = 0; i <= 15; i ++) {
+            Deadline deadline = new Deadline();
+            deadline.setName("My new Deadline" + i);
+            deadline.setUser(user);
+            deadline.setDate(LocalDateTime.now());
+            deadlineDao.save(deadline);
+        }
+
         // return user.getUsername() + " successfully registered deadline with id: " + deadline.getId().toString() ;
     }
 }
