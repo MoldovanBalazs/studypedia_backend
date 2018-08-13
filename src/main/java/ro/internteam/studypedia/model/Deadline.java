@@ -2,6 +2,7 @@ package ro.internteam.studypedia.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "deadline")
@@ -16,7 +17,7 @@ public class Deadline {
     private String name;
 
     @Column(name = "date")
-    private LocalDate date;
+    private LocalDateTime date;
 
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
@@ -37,11 +38,11 @@ public class Deadline {
         this.name = name;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
