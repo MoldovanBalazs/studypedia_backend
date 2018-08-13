@@ -2,7 +2,9 @@ package ro.internteam.studypedia.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ro.internteam.studypedia.model.Faculty;
 import ro.internteam.studypedia.model.University;
+import ro.internteam.studypedia.service.FacultyService;
 import ro.internteam.studypedia.service.UniversityService;
 
 import java.util.ArrayList;
@@ -16,11 +18,23 @@ public class UniversityResource {
     @Autowired
     private UniversityService universityService;
 
+    @Autowired
+    private FacultyService facultyService;
+
+    /**Adi*/
     @PostMapping(path = "/insertUniversity")
     public String insertUniversity(
             @RequestBody University newUniversity
             ){
-        this.universityService.saveUniversity(newUniversity);
+        /*List<Faculty> faculties = new ArrayList<>();
+        newUniversity.getFaculties().forEach(f -> faculties.add(facultyService.insertFaculty(f)));
+        newUniversity.getFaculties().clear();
+        newUniversity.getFaculties().addAll(faculties);*/
+        University university = this.universityService.saveUniversity(newUniversity);
+        /*faculties.forEach(f -> {
+            f.setUniversity(university);
+            //facultyService.insertFaculty(f);
+        });*/
         return "added university " + newUniversity.getName();
     }
 
@@ -40,14 +54,6 @@ public class UniversityResource {
             }
         }
         return universities;
-    }
-
-    @PutMapping(path = "/updateUniversities")
-    public String insertFaculty(
-            @RequestParam(name = "universityId") Integer universityId,
-            @RequestParam(name = "faculty") String faculty
-    ){
-        return this.universityService.insertFaculty(universityId, faculty);
     }
 
 }

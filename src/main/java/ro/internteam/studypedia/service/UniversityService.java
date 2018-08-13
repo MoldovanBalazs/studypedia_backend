@@ -19,23 +19,14 @@ public class UniversityService {
     @Autowired
     private FacultyDao facultyDao;
 
-    public void saveUniversity(University newUniversity) {
-        this.universityDao.save(newUniversity);
+    /**Adi*/
+    public University saveUniversity(University newUniversity) {
+        return this.universityDao.save(newUniversity);
     }
 
+    /**Adi*/
     public Iterable<University> getUniversities() {
         return this.universityDao.findAll();
-    }
-
-    public String insertFaculty(Integer universityId, String facultyName) {
-        University newUniversity = this.universityDao.findById(universityId).orElse(null);
-        if (newUniversity != null) {
-            Faculty newFaculty = new Faculty();
-            newFaculty.setName(facultyName);
-            newUniversity.insertFaculty(newFaculty);
-            return "added faculty " + facultyName;
-        }
-        return "University with id = " + universityId + " doesn't exist";
     }
 
     /**

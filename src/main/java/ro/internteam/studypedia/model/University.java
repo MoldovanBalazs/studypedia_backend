@@ -50,6 +50,10 @@ public class University {
         this.faculties.add(faculty);
     }
 
+    public List<Faculty> getFaculties() {
+        return this.faculties;
+    }
+
 
 
 

@@ -1,5 +1,7 @@
 package ro.internteam.studypedia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.List;
         @Column(name = "name")
         private String name;
 
+        @JsonIgnore
         @ManyToOne(targetEntity = University.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
         private University university;
 
@@ -39,6 +42,12 @@ import java.util.List;
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public University getUniversity(){return this.university;}
+
+    public void setUniversity(University university){
+            this.university = university;
     }
 
 }
