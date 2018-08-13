@@ -45,9 +45,10 @@ public class FacultyResource {
 
     @PostMapping(path = "/insertFaculty")
     public String insertFaculty(
-            @RequestBody Faculty newFaculty
+            @RequestBody Faculty newFaculty,
+            @RequestParam(name = "universityId") Integer universityId
     ){
-        this.facultyService.insertFaculty(newFaculty);
+        this.facultyService.insertFaculty(newFaculty, universityId);
         return "";
     }
 

@@ -26,15 +26,15 @@ public class UniversityResource {
     public String insertUniversity(
             @RequestBody University newUniversity
             ){
-        /*List<Faculty> faculties = new ArrayList<>();
-        newUniversity.getFaculties().forEach(f -> faculties.add(facultyService.insertFaculty(f)));
-        newUniversity.getFaculties().clear();
-        newUniversity.getFaculties().addAll(faculties);*/
+        List<Faculty> faculties = new ArrayList<>();
+        for(Faculty faculty : newUniversity.getFaculties()){
+            faculties.add(faculty);
+        }
         University university = this.universityService.saveUniversity(newUniversity);
-        /*faculties.forEach(f -> {
-            f.setUniversity(university);
-            //facultyService.insertFaculty(f);
-        });*/
+        for(Faculty faculty : faculties){
+            faculty.setUniversity(newUniversity);
+            this.facultyService.insertFaculty(faculty, newUniversity.getId());
+        }
         return "added university " + newUniversity.getName();
     }
 

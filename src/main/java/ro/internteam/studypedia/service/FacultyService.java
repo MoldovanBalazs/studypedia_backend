@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ro.internteam.studypedia.dao.FacultyDao;
 import ro.internteam.studypedia.dao.UniversityDao;
 import ro.internteam.studypedia.model.Faculty;
+import ro.internteam.studypedia.model.University;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,12 @@ public class FacultyService {
     }
 
     /**Adi*/
-    public Faculty insertFaculty(Faculty newFaculty){
+    public Faculty insertFaculty(Faculty newFaculty, Integer universityId){
+        University university = this.universityDao.findById(universityId).orElse(null);
+        if(university == null){
+            return null;
+        }
+        newFaculty.setUniversity(university);
         return this.facultyDao.save(newFaculty);
     }
 
