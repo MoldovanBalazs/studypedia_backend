@@ -16,7 +16,7 @@ import java.util.List;
  * @author I. Marcu
  */
 @Entity
-@Table(name = "user")
+@Table(name = "university")
 public class University {
 
     @Id
@@ -44,6 +44,10 @@ public class University {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void insertFaculty(Faculty faculty){
+        this.faculties.add(faculty);
     }
 
 

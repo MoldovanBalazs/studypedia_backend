@@ -1,7 +1,6 @@
 package ro.internteam.studypedia.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -75,27 +74,19 @@ public class Article {
         this.description = description;
     }
 
+    public ArticleStatus getArticleStatus() { return articleStatus; }
+
+    public void setArticleStatus(ArticleStatus articleStatus) { this.articleStatus = articleStatus; }
+
+    public ArticleType getArticleType() { return articleType; }
+
+    public void setArticleType(ArticleType articleType) { this.articleType = articleType; }
+
     public Subject getSubject() {
         return subject;
     }
 
     public void setSubject(Subject subject) {
         this.subject = subject;
-    }
-
-    public ArticleStatus getArticleStatus() {
-        return articleStatus;
-    }
-
-    public void setArticleStatus(ArticleStatus articleStatus) {
-        this.articleStatus = articleStatus;
-    }
-
-    public ArticleType getArticleType() {
-        return articleType;
-    }
-
-    public void setArticleType(ArticleType articleType) {
-        this.articleType = articleType;
     }
 }
