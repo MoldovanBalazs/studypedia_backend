@@ -7,6 +7,7 @@ import ro.internteam.studypedia.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -19,14 +20,26 @@ public class DeadlineResource {
     @Autowired
     private UserDao userDao;
 
-    @PostMapping("/newdeadline")
-    public void insertDeadline(@RequestBody Deadline deadline) {
+    @PostMapping("/insert")
+    public Deadline insertDeadline(@RequestBody Deadline deadline) {
+        deadline.setUser( userDao.findById(deadline.getUser().getId()).get());
         deadlineDao.save(deadline);
+        deadline.setUser(null);
+        return (deadline);
     }
 
-    @GetMapping(path = "/user/{id}/deadlines")
-    public List<Deadline> getUserDeadlines(@PathVariable(value = "id") Integer id) {
-        return userDao.findById(id).get().getDeadlines();
+    @DeleteMapping("/deadline")
+    public String deleteDeadline(@RequestParam String deadlineId) {
+        System.out.println(deadlineId);
+        deadlineDao.delete(deadlineDao.findById(Integer.valueOf(deadlineId)).get());
+
+        return deadlineId.toString();
+    }
+
+    @GetMapping(path = "/user/{userId}/deadlines")
+    public @ResponseBody List<Deadline> getUserDeadlines(@PathVariable Integer userId) {
+        //return userDao.findById(userId).get().getDeadlines();
+        return deadlineDao.findAllByUserEqualsAndDateAfterOrderByDate(userDao.findById(userId).get(), LocalDateTime.now());
     }
 
     @GetMapping(path = "/deadline/{id}")
@@ -36,9 +49,15 @@ public class DeadlineResource {
 
     @PostMapping("/testInsertDeadline")
     public void insertUtility() {
-        User user = userDao.findById(1).get();
-        Deadline deadline = new Deadline();
-        deadline.setName("My new Deadline");
+        User user = userDao.findById(8).get();
+        for(int i = 0; i <= 15; i ++) {
+            Deadline deadline = new Deadline();
+            deadline.setName("My new Deadline" + i);
+            deadline.setUser(user);
+            deadline.setDate(LocalDateTime.now());
+            deadlineDao.save(deadline);
+        }
+
         // return user.getUsername() + " successfully registered deadline with id: " + deadline.getId().toString() ;
     }
 }

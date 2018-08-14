@@ -97,6 +97,4 @@ public class Article {
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
-
-
 }
