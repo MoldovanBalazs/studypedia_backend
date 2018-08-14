@@ -19,6 +19,9 @@ public class Subject {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subject", fetch = FetchType.EAGER)
     private List<Article> articles = new ArrayList<>();
 
@@ -58,4 +61,8 @@ public class Subject {
     public void setBranches(List<Branch> branches) {
         this.branches = branches;
     }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) { this.description = description; }
 }
