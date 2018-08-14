@@ -34,6 +34,12 @@ public class User {
     @ManyToOne(targetEntity = Branch.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Branch branch;
 
+
+    @Column(name = "userType")
+    private UserType userType;
+
+
+
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     List<Article> articles = new ArrayList<>();
@@ -115,4 +121,13 @@ public class User {
     }
 
 
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
 }
+
+

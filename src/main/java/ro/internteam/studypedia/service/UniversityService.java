@@ -20,6 +20,7 @@ public class UniversityService {
     }
 
     public Object getUniversities(){
+
         return this.universityDao.findAll();
     }
 

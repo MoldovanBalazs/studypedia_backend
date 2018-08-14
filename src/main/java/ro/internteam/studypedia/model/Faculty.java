@@ -19,8 +19,6 @@ import java.util.List;
         @Column(name = "name")
         private String name;
 
-        @Column(name = "description")
-        private String description;
 
 //        @Column(name = "universityId")
         @ManyToOne(targetEntity = University.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -53,4 +51,11 @@ import java.util.List;
         this.name = name;
     }
 
+    public University getUniversity() {
+        return university;
+    }
+
+    public void setUniversity(University university) {
+        this.university = university;
+    }
 }
