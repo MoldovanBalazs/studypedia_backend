@@ -9,6 +9,7 @@ import ro.internteam.studypedia.dao.UserDao;
 import ro.internteam.studypedia.model.*;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import static ro.internteam.studypedia.model.ArticleStatus.PENDING;
 
@@ -31,7 +32,7 @@ public class SubmitService {
         Article article = new Article();
         article.setDescription(submitEntry.getDescription());
         article.setTitle(submitEntry.getTitle());
-//        article.setUser(user);
+//
         article.setDate(LocalDateTime.now());
         article.setArticleStatus(PENDING);
         article.setArticleType(ArticleType.valueOf(submitEntry.getArticleType().toUpperCase()));
@@ -43,10 +44,12 @@ public class SubmitService {
             }
         }
 
+        User user = userDao.findById(submitEntry.getUserId()).get();
+        article.setUser(user);
+
         articleDao.save(article);
 
-        return "Entry " + submitEntry.getUniversity() + submitEntry.getFaculty() + submitEntry.getBranch() + submitEntry.getSubject() +
-                submitEntry.getArticleType() + submitEntry.getTitle() + submitEntry.getDescription() + " submitted!";
+        return "succes";
 
 
     }
