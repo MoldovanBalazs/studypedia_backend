@@ -1,6 +1,6 @@
 package ro.internteam.studypedia.model;
 
-import org.hibernate.type.descriptor.sql.LobTypeMappings;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -32,6 +32,7 @@ public class Article {
     @Column(name = "articleType")
     private ArticleType articleType;
 
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Subject.class)
     private Subject subject;
 
