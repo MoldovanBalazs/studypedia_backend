@@ -1,7 +1,6 @@
 package ro.internteam.studypedia.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ro.internteam.studypedia.dao.ArticleDao;
 import ro.internteam.studypedia.dao.SubjectDao;
@@ -9,7 +8,6 @@ import ro.internteam.studypedia.dao.UserDao;
 import ro.internteam.studypedia.model.*;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import static ro.internteam.studypedia.model.ArticleStatus.PENDING;
 
@@ -27,12 +25,10 @@ public class SubmitService {
 
     @PostMapping(path = "/submit_entry")
     public String addEntry(@RequestBody final SubmitEntry submitEntry) {
-//        User user = userDao.findById(8).get();
 
         Article article = new Article();
         article.setDescription(submitEntry.getDescription());
         article.setTitle(submitEntry.getTitle());
-//
         article.setDate(LocalDateTime.now());
         article.setArticleStatus(PENDING);
         article.setArticleType(ArticleType.valueOf(submitEntry.getArticleType().toUpperCase()));
