@@ -12,9 +12,6 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author I. Marcu
- */
 @Entity
 @Table(name = "university")
 public class University {
@@ -49,8 +46,4 @@ public class University {
     public void insertFaculty(Faculty faculty){
         this.faculties.add(faculty);
     }
-
-
-
-
 }
