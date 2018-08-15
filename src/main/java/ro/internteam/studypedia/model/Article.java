@@ -1,5 +1,7 @@
 package ro.internteam.studypedia.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -18,11 +20,10 @@ public class Article {
     @Column(name = "date")
     private LocalDateTime date;
 
-//    @Column(name = "userId")
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
 
-    @Column(name = "description")
+    @Column(name = "description",columnDefinition="LONGTEXT")
     private String description;
 
     @Column(name = "articleStatus")
@@ -31,8 +32,21 @@ public class Article {
     @Column(name = "articleType")
     private ArticleType articleType;
 
+    @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Subject.class)
     private Subject subject;
+
+    @Column( name = "file" )
+    @Lob
+    private byte[] file;
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
 
     public Integer getId() {
         return id;
@@ -66,6 +80,7 @@ public class Article {
         this.user = user;
     }
 
+    @Column(name = "description",columnDefinition="LONGTEXT")
     public String getDescription() {
         return description;
     }
