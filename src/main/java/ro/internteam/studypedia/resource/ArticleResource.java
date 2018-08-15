@@ -7,6 +7,8 @@ import ro.internteam.studypedia.model.*;
 import ro.internteam.studypedia.service.ArticleService;
 import ro.internteam.studypedia.service.UniversityService;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 public class ArticleResource {
@@ -22,6 +24,10 @@ public class ArticleResource {
     @Autowired
     private UniversityService universityService;
 
+    @GetMapping(path = "/user/{id}/articles")
+    public List<Article> getUserArticle(@PathVariable Integer id) {
+        return userDao.findById(id).get().getArticles();
+    }
 
     @PostMapping(path = "/insertArticle")
     public void insertArticle(

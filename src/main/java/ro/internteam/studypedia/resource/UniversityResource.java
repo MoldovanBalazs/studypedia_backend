@@ -2,7 +2,11 @@ package ro.internteam.studypedia.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ro.internteam.studypedia.dao.UniversityDao;
+import ro.internteam.studypedia.model.University;
 import ro.internteam.studypedia.service.UniversityService;
+
+import java.util.List;
 
 /*Adi*/
 @RestController
@@ -11,6 +15,9 @@ public class UniversityResource {
 
     @Autowired
     private UniversityService universityService;
+
+    @Autowired
+    private UniversityDao universityDao;
 
     @PostMapping(path = "/insertUniversity")
     public String insertUniversity(
@@ -23,6 +30,11 @@ public class UniversityResource {
     @GetMapping(path = "/university/all")
     public Object getUniversities(){
         return this.universityService.getUniversities();
+    }
+
+    @GetMapping(path = "/universities")
+    public List<University> getUniversityList(){
+        return this.universityDao.findAll();
     }
 
     @PutMapping(path = "/insertFaculty")
