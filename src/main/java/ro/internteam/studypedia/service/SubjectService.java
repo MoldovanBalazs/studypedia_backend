@@ -10,7 +10,7 @@ public class SubjectService {
     @Autowired
     SubjectDao subjectDao;
 
-    @GetMapping(path = "/get_subjects")
+    @GetMapping(path = "/subject/all")
     public Object getSubjects() {
         return subjectDao.findAll();
     }
