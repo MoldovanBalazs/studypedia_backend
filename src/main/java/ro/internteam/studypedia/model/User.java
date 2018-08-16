@@ -25,27 +25,25 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @ManyToOne(targetEntity = Faculty.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Faculty.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Faculty faculty;
 
-    @ManyToOne(targetEntity = University.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = University.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private University university;
 
-    @ManyToOne(targetEntity = Branch.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Branch.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Branch branch;
 
 
     @Column(name = "userType")
     private UserType userType;
 
-
-
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "user", fetch = FetchType.EAGER)
     List<Article> articles = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private List<Deadline> deadlines = new ArrayList<>();
 
     public String getName() {

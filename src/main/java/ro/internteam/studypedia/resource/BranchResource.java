@@ -2,14 +2,13 @@ package ro.internteam.studypedia.resource;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ro.internteam.studypedia.dao.BranchDao;
 import ro.internteam.studypedia.model.Branch;
 import ro.internteam.studypedia.model.Faculty;
 import ro.internteam.studypedia.service.BranchService;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -19,7 +18,12 @@ public class BranchResource {
     BranchDao branchDao;
 
     @Autowired
-    BranchService branchService;
+    private BranchService branchService;
+
+    @GetMapping(path = "/branch/all")
+    public Object getBranches(){
+        return this.branchService.getAllBranches();
+    }
 
     @PostMapping(path = "/insertBranch")
     public void insertBranch(
@@ -28,5 +32,11 @@ public class BranchResource {
 
     ){
         this.branchService.saveBranch(branchName, faculty_id);
+    }
+
+    @GetMapping(path = "/{facultyId}/branches")
+    public List<Branch> getBranchesByFacultyId(@PathVariable Integer facultyId) {
+
+        return branchDao.findAllByFacultyId(facultyId);
     }
 }

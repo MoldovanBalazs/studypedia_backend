@@ -5,16 +5,18 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import ro.internteam.studypedia.dao.BranchDao;
 import ro.internteam.studypedia.dao.FacultyDao;
-import ro.internteam.studypedia.dao.SubjectDao;
 import ro.internteam.studypedia.model.*;
+import org.springframework.stereotype.Service;
 
 @RestController
 @CrossOrigin
+@Service
 public class BranchService {
 
     @Autowired
     private BranchDao branchDao;
 
+    public Object getAllBranches(){return this.branchDao.findAll();}
     @Autowired
     private FacultyDao facultyDao;
 

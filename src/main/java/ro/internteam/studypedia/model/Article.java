@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -23,6 +27,7 @@ public class Article {
     private LocalDateTime date;
 
 //    @Column(name = "userId")
+    @JsonIgnore
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
 
@@ -35,8 +40,22 @@ public class Article {
     @Column(name = "articleType")
     private ArticleType articleType;
 
+    //@JsonBackReference
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Subject.class)
     private Subject subject;
+
+    @Column( name = "file" )
+    @Lob
+    private byte[] file;
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
 
     public Integer getId() {
         return id;
@@ -70,6 +89,7 @@ public class Article {
         this.user = user;
     }
 
+  //  @Column(name = "description",columnDefinition="LONGTEXT")
     public String getDescription() {
         return description;
     }

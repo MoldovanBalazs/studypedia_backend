@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +32,10 @@ public class Subject {
     private List<Article> articles = new ArrayList<>();
 
     @JsonManagedReference
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "branch_subject", joinColumns = {@JoinColumn(name = "subject_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "branch_id", nullable = false)})
+
     private List<Branch> branches = new ArrayList<>();
 
     public Integer getId() {
