@@ -22,6 +22,8 @@ import java.util.List;
         private String name;
 
 
+//        @Column(name = "universityId")
+        @JsonIgnore
         @ManyToOne(targetEntity = University.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
         private University university;
 
@@ -30,9 +32,12 @@ import java.util.List;
                 inverseJoinColumns = {@JoinColumn(name = "materie_id", nullable = false)})
         private List<Subject> materii  = new ArrayList<>();*/
 
+
+
+
     @JsonIgnore
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "faculty", fetch = FetchType.EAGER)
-        private List<Branch> branches = new ArrayList<>();
+    private List<Branch> branches = new ArrayList<>();
 
         public Integer getId() {
                 return id;

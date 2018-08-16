@@ -8,6 +8,8 @@ import ro.internteam.studypedia.model.Branch;
 import ro.internteam.studypedia.model.Faculty;
 import ro.internteam.studypedia.service.BranchService;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 public class BranchResource {
@@ -30,5 +32,11 @@ public class BranchResource {
 
     ){
         this.branchService.saveBranch(branchName, faculty_id);
+    }
+
+    @GetMapping(path = "/{facultyId}/branches")
+    public List<Branch> getBranchesByFacultyId(@PathVariable Integer facultyId) {
+
+        return branchDao.findAllByFacultyId(facultyId);
     }
 }

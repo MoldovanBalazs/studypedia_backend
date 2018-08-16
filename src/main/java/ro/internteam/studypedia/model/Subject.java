@@ -23,7 +23,7 @@ public class Subject {
     @Column(name = "name")
     private String name;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subject", fetch = FetchType.EAGER)
     private List<Article> articles = new ArrayList<>();
 
