@@ -63,7 +63,7 @@ public class UserResource {
                 safeUser.setBranch(user.getBranch());
                 safeUser.setUserType(user.getUserType());
 
-                return safeUser;
+                return user;
             }
         }
 
