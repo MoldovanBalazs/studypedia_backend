@@ -1,5 +1,7 @@
 package ro.internteam.studypedia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +29,8 @@ public class University {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "university", fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "university", fetch = FetchType.EAGER)
     List<Faculty> faculties = new ArrayList<>();
 
     public Integer getId() {

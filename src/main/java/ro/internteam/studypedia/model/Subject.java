@@ -1,5 +1,7 @@
 package ro.internteam.studypedia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +21,14 @@ public class Subject {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
-    private String description;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subject", fetch = FetchType.EAGER)
     private List<Article> articles = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "branch_subject", joinColumns = {@JoinColumn(name = "subjectId", nullable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "branchId", nullable = false)})
+
+    @JsonIgnore
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "branch_subject", joinColumns = {@JoinColumn(name = "subject_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "branch_id", nullable = false)})
     private List<Branch> branches = new ArrayList<>();
 
     public Integer getId() {
@@ -62,7 +63,4 @@ public class Subject {
         this.branches = branches;
     }
 
-    public String getDescription() { return description; }
-
-    public void setDescription(String description) { this.description = description; }
 }

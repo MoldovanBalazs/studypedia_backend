@@ -1,5 +1,7 @@
 package ro.internteam.studypedia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +22,10 @@ public class Branch {
     @ManyToOne(targetEntity = Faculty.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Faculty faculty;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "branch_subject", joinColumns = {@JoinColumn(name = "branchId", nullable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "subjectId", nullable = false)})
+    @JsonIgnore
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "branch_subject", joinColumns = {@JoinColumn(name = "branch_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "subject_id", nullable = false)})
     private List<Subject> subjects = new ArrayList<>();
 
 
