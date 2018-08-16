@@ -1,5 +1,8 @@
 package ro.internteam.studypedia.model;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class SubmitEntry {
 
     private String subject;
