@@ -1,5 +1,4 @@
 package ro.internteam.studypedia.storage;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.io.Resource;

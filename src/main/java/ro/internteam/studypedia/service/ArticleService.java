@@ -70,6 +70,23 @@ public class ArticleService {
         });
         return filteredArticles;
     }
+    // Practic tot Daiana
+    public List getArticlesByStatus(String status){
+        List<Article> filteredArticles = new ArrayList<>();
+        int articleStatusInt = Integer.parseInt(status);
+        ArticleStatus articleStatus = null;
+
+        if(articleStatusInt == 0) articleStatus = ArticleStatus.DENIED;
+        else if(articleStatusInt == 1) articleStatus = ArticleStatus.ACCEPTED;
+        else if(articleStatusInt == 2) articleStatus = ArticleStatus.PENDING;
+        ArticleStatus finalArticleStatus = articleStatus;
+
+        articleDao.findAll().forEach(article -> {
+            if(article.getArticleStatus().equals(finalArticleStatus))
+                filteredArticles.add(article);
+        });
+        return filteredArticles;
+    }
 
     public void deleteArticleById(Integer id) {
         articleDao.findAll().forEach(article -> {

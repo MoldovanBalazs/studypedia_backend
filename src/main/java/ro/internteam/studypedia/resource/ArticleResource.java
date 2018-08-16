@@ -50,6 +50,12 @@ public class ArticleResource {
         return this.articleService.getArticlesByType(type);
     }
 
+    @GetMapping(path = "/article/status")
+    public Object getArticlesByStatus(@RequestParam(value = "status") String status) {
+        System.out.println(status);
+        return this.articleService.getArticlesByStatus(status);
+    }
+
     @DeleteMapping(path = "/articleDelete/{id}")
     public void deleteArticleById(@PathVariable("id") Integer id) {
         this.articleService.deleteArticleById(id);
