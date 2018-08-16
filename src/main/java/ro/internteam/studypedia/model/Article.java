@@ -1,5 +1,9 @@
 package ro.internteam.studypedia.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -22,7 +26,7 @@ public class Article {
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
 
-    @Column(name = "description")
+    @Column(name = "description",columnDefinition="LONGTEXT")
     private String description;
 
     @Column(name = "articleStatus")

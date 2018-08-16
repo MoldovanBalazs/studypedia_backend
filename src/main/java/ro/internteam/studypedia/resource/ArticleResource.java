@@ -45,7 +45,7 @@ public class ArticleResource {
 
     //Daiana
     @GetMapping(path = "/article/type")
-    public Object getArticlesByType(@RequestParam(value = "type") String type) {
+    public Object getArticlesByType(@RequestParam String type) {
         System.out.println(type);
         return this.articleService.getArticlesByType(type);
     }
@@ -62,9 +62,9 @@ public class ArticleResource {
     }
 
     @PutMapping(path = "/article")
-    public void updateStatus(@RequestParam(value = "articleId") Integer articleId,
-                               @RequestParam(value = "status") ArticleStatus status){
-        this.articleService.updateArticle(articleId,status);
+    public void updateStatus(@RequestParam String id,
+                               @RequestParam String status){
+        this.articleService.updateArticle(id,status);
     }
 
 }

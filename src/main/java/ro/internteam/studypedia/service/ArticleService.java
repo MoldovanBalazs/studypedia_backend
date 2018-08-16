@@ -43,12 +43,20 @@ public class ArticleService {
         this.articleDao.save(article);
     }
 
-    public String updateArticle(Integer articleId, ArticleStatus status){
-        Article article = articleDao.findById(articleId).orElse(null);
-        if(article != null){
-            article.setArticleStatus(status);
-            articleDao.save(article);
-        }
+    public String updateArticle(String articleId, String status){
+        Integer id = Integer.parseInt(articleId);
+        Article article = articleDao.findById(id).orElse(null);
+        int articleStatusInt = Integer.parseInt(status);
+        ArticleStatus articleStatus;
+
+        if(articleStatusInt == 0) articleStatus = ArticleStatus.DENIED;
+        else if(articleStatusInt == 1) articleStatus = ArticleStatus.ACCEPTED;
+        else articleStatus = ArticleStatus.PENDING;
+        ArticleStatus finalArticleStatus = articleStatus;
+
+        article.setArticleStatus(finalArticleStatus);
+        articleDao.save(article);
+
         return "modified article " + article.getTitle() + " to " + article.getArticleStatus();
     }
 
@@ -82,8 +90,9 @@ public class ArticleService {
         ArticleStatus finalArticleStatus = articleStatus;
 
         articleDao.findAll().forEach(article -> {
-            if(article.getArticleStatus().equals(finalArticleStatus))
+            if(article.getArticleStatus().equals(finalArticleStatus)) {
                 filteredArticles.add(article);
+            }
         });
         return filteredArticles;
     }
