@@ -2,36 +2,18 @@ package ro.internteam.studypedia.model;
 
 public class SubmitEntry {
 
-    private String university;
-    private String faculty;
-    private String branch;
     private String subject;
     private String articleType;
     private String title;
     private String description;
+    private Integer userId;
 
-    public String getUniversity() {
-        return university;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUniversity(String university) {
-        this.university = university;
-    }
-
-    public String getFaculty() {
-        return faculty;
-    }
-
-    public void setFaculty(String faculty) {
-        this.faculty = faculty;
-    }
-
-    public String getBranch() {
-        return branch;
-    }
-
-    public void setBranch(String branch) {
-        this.branch = branch;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getSubject() {

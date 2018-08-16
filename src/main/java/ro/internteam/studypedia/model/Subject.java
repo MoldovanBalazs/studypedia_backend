@@ -1,5 +1,7 @@
 package ro.internteam.studypedia.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -21,6 +23,7 @@ public class Subject {
     @Column(name = "name")
     private String name;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subject", fetch = FetchType.EAGER)
     private List<Article> articles = new ArrayList<>();
 
@@ -62,5 +65,4 @@ public class Subject {
     public void setBranches(List<Branch> branches) {
         this.branches = branches;
     }
-
 }
