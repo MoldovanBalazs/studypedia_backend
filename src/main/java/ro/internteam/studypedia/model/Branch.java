@@ -1,6 +1,7 @@
 package ro.internteam.studypedia.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Branch {
     @Column(name = "name")
     private String name;
 
+    @JsonIgnore
     @ManyToOne(targetEntity = Faculty.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Faculty faculty;
 

@@ -2,6 +2,8 @@ package ro.internteam.studypedia.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -20,6 +22,8 @@ public class Article {
     @Column(name = "date")
     private LocalDateTime date;
 
+//    @Column(name = "userId")
+    @JsonIgnore
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
 
@@ -32,7 +36,8 @@ public class Article {
     @Column(name = "articleType")
     private ArticleType articleType;
 
-    @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Subject.class)
     private Subject subject;
 
