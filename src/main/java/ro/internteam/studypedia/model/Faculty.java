@@ -1,5 +1,7 @@
 package ro.internteam.studypedia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ import java.util.List;
 
 
 //        @Column(name = "universityId")
+        @JsonIgnore
         @ManyToOne(targetEntity = University.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
         private University university;
 
@@ -32,30 +35,41 @@ import java.util.List;
 
 
 
-        @OneToMany(cascade = CascadeType.ALL, mappedBy = "faculty", fetch = FetchType.EAGER)
-        private List<Branch> branches = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "faculty", fetch = FetchType.EAGER)
+    private List<Branch> branches = new ArrayList<>();
 
         public Integer getId() {
-            return id;
+                return id;
+            }
+
+        public void setId(Integer id) {
+            this.id = id;
         }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+        public String getName() {
+            return name;
+        }
 
-    public String getName() {
-        return name;
-    }
+        public void setName(String name) {
+            this.name = name;
+        }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public University getUniversity() {
-        return university;
-    }
+        public University getUniversity() {
+            return university;
+        }
 
-    public void setUniversity(University university) {
-        this.university = university;
+        public void setUniversity(University university) {
+            this.university = university;
+        }
+
+        public List<Branch> getBranches() {
+            return branches;
+        }
+
+        public void setBranches(List<Branch> branches) {
+            this.branches = branches;
+        }
+
     }
-}

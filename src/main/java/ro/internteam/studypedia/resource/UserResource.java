@@ -24,6 +24,15 @@ public class UserResource {
         return userDao.findAll();
     }
 
+    @GetMapping(path = "/valid/{username}")
+    public boolean checkValidUsername(@PathVariable String username) {
+        User user = this.userDao.findAllByUsername(username);
+        if(user != null) {
+            return false;
+        }
+        return true;
+    }
+
     @GetMapping(path = "/validate/{userLog}")
     public User verifyLogin(@PathVariable String userLog) {
         ObjectMapper mapper = new ObjectMapper();
@@ -54,10 +63,27 @@ public class UserResource {
                 safeUser.setBranch(user.getBranch());
                 safeUser.setUserType(user.getUserType());
 
-                return safeUser;
+                return user;
             }
         }
 
+        return null;
+    }
+
+
+    @PostMapping(path = "/insert/user")
+    public Object insertUser(@RequestBody String user){
+        ObjectMapper mapper = new ObjectMapper();
+        User newUser = new User();
+        try {
+            newUser = mapper.readValue(user, User.class);
+        } catch (Exception e) {
+            return null;
+        }
+
+        if(newUser != null) {
+            return this.userDao.save(newUser);
+        }
         return null;
     }
 
@@ -72,18 +98,5 @@ public class UserResource {
 
 
 
-    @PostMapping(path = "/insertUser")
-    public void insertUser(
-            @RequestParam(name = "name") String fullName,
-            @RequestParam(name = "username") String username,
-            @RequestParam(name = "password") String password,
-            @RequestParam(name = "university") University university,
-            @RequestParam(name = "faculty") Faculty faculty,
-            @RequestParam(name = "branch") Branch branch,
-            @RequestParam(name = "userType") UserType userType
-
-    ){
-        this.userService.saveUser(fullName, username, password, university, faculty, branch, userType);
-    }
 }
 

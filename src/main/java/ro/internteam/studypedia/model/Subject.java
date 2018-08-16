@@ -1,6 +1,12 @@
 package ro.internteam.studypedia.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,13 +27,15 @@ public class Subject {
     @Column(name = "name")
     private String name;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subject", fetch = FetchType.EAGER)
     private List<Article> articles = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "branch_subject", joinColumns = {@JoinColumn(name = "subjectId", nullable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "branchId", nullable = false)})
+    @JsonManagedReference
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "branch_subject", joinColumns = {@JoinColumn(name = "subject_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "branch_id", nullable = false)})
+
     private List<Branch> branches = new ArrayList<>();
 
     public Integer getId() {

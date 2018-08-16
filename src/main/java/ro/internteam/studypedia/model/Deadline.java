@@ -19,7 +19,7 @@ public class Deadline {
     @Column(name = "date")
     private LocalDateTime date;
 
-    @ManyToOne(targetEntity = User.class, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = User.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private User user;
 
     public Integer getId() {
