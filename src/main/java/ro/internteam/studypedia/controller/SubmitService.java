@@ -32,14 +32,16 @@ public class SubmitService {
     @Autowired
     SubjectDao subjectDao;
 
-    @PostMapping(path = "/submit_entry")
-    public String addEntry(@RequestBody final SubmitEntry body) throws IOException {
+    @PostMapping(path = "/submit_entry/{articleId}")
+    public String addEntry(@RequestBody final SubmitEntry body, @PathVariable String articleId) throws IOException {
 
         Article article = new Article();
         article.setDescription(body.getDescription());
         article.setTitle(body.getTitle());
         article.setDate(LocalDateTime.now());
         article.setArticleStatus(PENDING);
+
+
         article.setArticleType(ArticleType.valueOf(body.getArticleType().toUpperCase()));
 
         for (Subject subject : subjectDao.findAll()) {
@@ -48,8 +50,9 @@ public class SubmitService {
                 break;
             }
         }
-
-        User user = userDao.findById(body.getUserId()).get();
+        System.out.println("bpdy is" + body.toString());
+        User user = userDao.findById(Integer.valueOf(articleId)).get();
+        System.out.println("user is" + user.toString());
         article.setUser(user);
 
         articleDao.save(article);
