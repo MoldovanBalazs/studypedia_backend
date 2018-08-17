@@ -1,6 +1,12 @@
 package ro.internteam.studypedia.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ro.internteam.studypedia.dao.ArticleDao;
@@ -67,6 +73,20 @@ public class SubmitService {
 
         return "succes";
     }
+
+    @GetMapping("/download/file/{id}")
+    public ResponseEntity<?> downloadFile(@PathVariable String id ) {
+        System.out.println("Request received to download file");
+        Article article = articleDao.findById(Integer.parseInt(id)).orElse(null);
+        if(article == null || article.getFile() == null ){
+            return null;
+        }
+        byte[] content = article.getFile();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        return new ResponseEntity<>(content, headers, HttpStatus.OK);
+    }
+
 
 }
 
