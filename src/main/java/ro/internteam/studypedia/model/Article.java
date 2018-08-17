@@ -26,8 +26,6 @@ public class Article {
     @Column(name = "date")
     private LocalDateTime date;
 
-//    @Column(name = "userId")
-    @JsonIgnore
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
 
