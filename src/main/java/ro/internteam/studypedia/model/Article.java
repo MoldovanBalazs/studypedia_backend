@@ -26,11 +26,11 @@ public class Article {
     @Column(name = "date")
     private LocalDateTime date;
 
-//    @Column(name = "userId")
+    //    @Column(name = "userId")
     @ManyToOne(targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
 
-    @Column(name = "description",columnDefinition="LONGTEXT")
+    @Column(name = "description", columnDefinition = "LONGTEXT")
     private String description;
 
     @Column(name = "articleStatus")
@@ -38,14 +38,25 @@ public class Article {
 
     @Column(name = "articleType")
     private ArticleType articleType;
+    @Column(name = "filename")
+    private String filename;
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
 
     //@JsonBackReference
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = Subject.class)
     private Subject subject;
 
-    @Column( name = "file" )
+    @Column(name = "file")
     @Lob
+    @JsonIgnore
     private byte[] file;
 
     public byte[] getFile() {
@@ -88,7 +99,7 @@ public class Article {
         this.user = user;
     }
 
-  //  @Column(name = "description",columnDefinition="LONGTEXT")
+    //  @Column(name = "description",columnDefinition="LONGTEXT")
     public String getDescription() {
         return description;
     }
@@ -97,13 +108,21 @@ public class Article {
         this.description = description;
     }
 
-    public ArticleStatus getArticleStatus() { return articleStatus; }
+    public ArticleStatus getArticleStatus() {
+        return articleStatus;
+    }
 
-    public void setArticleStatus(ArticleStatus articleStatus) { this.articleStatus = articleStatus; }
+    public void setArticleStatus(ArticleStatus articleStatus) {
+        this.articleStatus = articleStatus;
+    }
 
-    public ArticleType getArticleType() { return articleType; }
+    public ArticleType getArticleType() {
+        return articleType;
+    }
 
-    public void setArticleType(ArticleType articleType) { this.articleType = articleType; }
+    public void setArticleType(ArticleType articleType) {
+        this.articleType = articleType;
+    }
 
     public Subject getSubject() {
         return subject;

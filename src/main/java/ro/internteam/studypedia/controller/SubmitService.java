@@ -1,11 +1,10 @@
 package ro.internteam.studypedia.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.Resource;
+import org.springframework.http.*;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -68,6 +67,7 @@ public class SubmitService {
         }
         Article article = articleDao.findById(id).get();
         article.setFile(file.getBytes());
+        article.setFilename(file.getOriginalFilename());
 
         articleDao.save(article);
 
@@ -75,16 +75,18 @@ public class SubmitService {
     }
 
     @GetMapping("/download/file/{id}")
-    public ResponseEntity<?> downloadFile(@PathVariable String id ) {
+    public ResponseEntity<Resource> downloadFile(@PathVariable String id) {
         System.out.println("Request received to download file");
         Article article = articleDao.findById(Integer.parseInt(id)).orElse(null);
-        if(article == null || article.getFile() == null ){
+        if (article == null || article.getFile() == null) {
             return null;
         }
         byte[] content = article.getFile();
+        ByteArrayResource file = new ByteArrayResource(content);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        return new ResponseEntity<>(content, headers, HttpStatus.OK);
+        headers.setContentDisposition(ContentDisposition.parse("attachment; filename=\"" + article.getFilename() + "\""));
+        return ResponseEntity.ok().headers(headers).body(file);
     }
 
 
