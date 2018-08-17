@@ -31,11 +31,9 @@ public class Subject {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subject", fetch = FetchType.EAGER)
     private List<Article> articles = new ArrayList<>();
 
-    @JsonManagedReference
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "branch_subject", joinColumns = {@JoinColumn(name = "subject_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "branch_id", nullable = false)})
-
     private List<Branch> branches = new ArrayList<>();
 
     public Integer getId() {

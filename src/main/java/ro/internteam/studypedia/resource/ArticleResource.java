@@ -29,6 +29,11 @@ public class ArticleResource {
         return userDao.findById(id).get().getArticles();
     }
 
+    @GetMapping(path = "/articleid")
+    public Object getArticleById(@RequestParam String id) {
+        return articleDao.findById(Integer.valueOf(id));
+    }
+
     @PostMapping(path = "/insertArticle")
     public void insertArticle(
             @RequestParam(name = "title") String title,

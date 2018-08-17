@@ -28,11 +28,10 @@ public class Branch {
     @ManyToOne(targetEntity = Faculty.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Faculty faculty;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(name = "branch_subject", joinColumns = {@JoinColumn(name = "branch_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "subject_id", nullable = false)})
-
     private List<Subject> subjects = new ArrayList<>();
 
 

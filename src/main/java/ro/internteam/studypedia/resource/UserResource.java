@@ -8,6 +8,8 @@ import ro.internteam.studypedia.dao.UserDao;
 import ro.internteam.studypedia.model.*;
 import ro.internteam.studypedia.service.UserService;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 public class UserResource {
@@ -20,7 +22,7 @@ public class UserResource {
 
     //Daiana
     @GetMapping(path = "/user/all")
-    public Object getUsers() {
+    public Iterable<User> getUsers() {
         return userDao.findAll();
     }
 
